@@ -15,13 +15,13 @@ public:
             if(mp[val] > 0) {
                 int diff = abs(val - k);
                 if(diff == val && mp[diff] > 1) {
-                    cout<<diff<<" - "<<val<<" "<<mp[diff]<<" "<<mp[val]<<endl;
+                    //cout<<diff<<" - "<<val<<" "<<mp[diff]<<" "<<mp[val]<<endl;
                 
                     cnt++;
                     mp[diff]--;
                     mp[val]--;
                 } else if(diff != val && mp[diff] > 0) {
-                    cout<<diff<<" -- "<<val<<" "<<mp[diff]<<" "<<mp[val]<<endl;
+                    //cout<<diff<<" -- "<<val<<" "<<mp[diff]<<" "<<mp[val]<<endl;
                 
                     cnt++;
                     mp[diff]--;
