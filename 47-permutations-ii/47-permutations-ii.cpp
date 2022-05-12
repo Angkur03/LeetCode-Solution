@@ -12,7 +12,7 @@ public:
         return ans;
     }
     
-    void getPermutation(vector<int>& nums, vector<int>&pattern, vector<int>&mp, set<vector<int>> &patSet) {
+    void getPermutation(vector<int> &nums, vector<int> &pattern, vector<int> &mp, set<vector<int>> &patSet) {
         if(pattern.size() == nums.size()) {
             patSet.insert(pattern);
             return;
