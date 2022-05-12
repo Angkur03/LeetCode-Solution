@@ -20,13 +20,12 @@ public:
         
         for(int i=0; i<nums.size(); i++) {
             int val = nums[i];
-            if(mp[i] == 0) {
-                pattern.push_back(val);
-                mp[i] = 1;
-                getPermutation(nums,pattern,mp,patSet);
-                pattern.pop_back();
-                mp[i] = 0;
-            }
+            if(mp[i]) continue;
+             pattern.push_back(val);
+             mp[i] = 1;
+             getPermutation(nums,pattern,mp,patSet);
+             pattern.pop_back();
+             mp[i] = 0;
         }
     }
 };
