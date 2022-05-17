@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
-        priority_queue<pair<int,pair<int,int>> >pq;
+        priority_queue<pair<int,pair<int,int>>, vector<pair<int,pair<int,int>>>, greater<pair<int,pair<int,int>>>>pq;
         for(auto point: points) {
             cout<<point[0]<<" "<<point[1]<<endl;
             int x = point[0];
@@ -17,8 +17,10 @@ public:
             pq.pop();
             //cout<<"front "<<front.first<<" "<<front.second.first<<endl;
             ans.push_back({front.second.first,front.second.second});
+            k--;
         }
-        reverse(ans.begin(),ans.end());
-        return {ans.begin(), ans.begin() + k};
+        return ans;
+        //reverse(ans.begin(),ans.end());
+        //return {ans.begin(), ans.begin() + k};
     }
 };
