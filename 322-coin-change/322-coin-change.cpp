@@ -1,31 +1,39 @@
 class Solution {
 public:
-    long long coinChange(vector<int>& coins, int amount) {
-        long long dp[10005];    
-         
-        for(long long i=0; i<amount+1; i++) {
-            dp[i] = INT_MAX;
-        }
-        
-        dp[0] = 0;
-        
-        for(long long i=0; i<=amount; i++){
-            if(dp[i] == INT_MAX) {
-                continue;
-            }
-            for(long long j=0; j<coins.size(); j++) {
-                long long val = i + coins[j];
-                if(val<=amount) {
-                    dp[val] = min(dp[i] + 1, dp[val]);
-                }
+    int dp[15][10005];
+    int coinChange(vector<int>& coins, int amount) {
+        for(int i=0; i<15; i++) {
+            for(int j=0; j<10001; j++) {
+                dp[i][j] = -1;
             }
         }
-        
-        if(dp[amount] == INT_MAX) {
+        long ans = getMinCoin(coins, amount, 0);
+        if(ans >= INT_MAX) {
             return -1;
         }
-        
-        return dp[amount];
+        return int(ans);
     }
     
+    long getMinCoin(vector<int>& coins, int amount,int pos) {
+        if(pos >= coins.size() || amount < 0) {
+            return INT_MAX;
+        }
+        //cout<<amount<<" "<<pos<<endl;
+        if(amount == 0) {
+            //cout<<"found"<<endl;
+            return 0;
+        }
+        if(dp[pos][amount] != -1) {
+            return dp[pos][amount];
+        }
+        long  ret1 = 0;
+        long ret2 = 0;
+        long ret3 = 0;
+        
+        ret1 = getMinCoin(coins, amount - coins[pos], pos + 1) + 1;
+        ret2 = getMinCoin(coins, amount - coins[pos], pos) + 1;
+        ret3 = getMinCoin(coins, amount, pos + 1) ;
+        //cout<<ret1<<" "<<ret2<<endl;
+        return dp[pos][amount] = min(min(ret1,ret2),ret3);
+    }
 };
